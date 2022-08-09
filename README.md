@@ -21,3 +21,6 @@ Configuring CMake and building:
 cmake .
 cmake --build .
 ```
+
+# TODO
+  * [ ] Add a reset button
