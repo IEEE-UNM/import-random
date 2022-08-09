@@ -1,0 +1,3 @@
+[submodule "src/SpinningWheel"]
+	path = src/SpinningWheel
+	url = https://github.com/IEEE-UNM/SpinningWheel.git
