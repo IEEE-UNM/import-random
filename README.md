@@ -24,3 +24,4 @@ cmake --build .
 
 # TODO
   * [ ] Add a reset button
+  * [ ] Add "cosmetics" to winner
