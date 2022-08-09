@@ -23,6 +23,7 @@ jobs:
     - name: Installing Dependencies
       run: |
         sudo apt update
+        sudo apt upgrade -y
         sudo apt install -y qt6-base-dev
         
     - name: Configure CMake
