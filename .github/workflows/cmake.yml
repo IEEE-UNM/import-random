@@ -19,7 +19,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Installing Dependencies
+    - name: Updating Repositories
+      run: sudo apt update && sudo apt upgrade
+    - name: Installing Qt6
       run: sudo apt install qt6-base-dev
 
     - name: Configure CMake
