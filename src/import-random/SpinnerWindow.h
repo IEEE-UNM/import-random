@@ -13,7 +13,7 @@
 class SpinnerWindow: public QMainWindow {
     Q_OBJECT
     public:
-        SpinnerWindow(QWidget *);
+        SpinnerWindow(QWidget * = nullptr);
     public slots:
         void updateWheel();
         void spinWheel();

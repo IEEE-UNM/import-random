@@ -2,7 +2,7 @@
 #include <QGridLayout>
 #include <QGraphicsOpacityEffect>
 
-SpinnerWindow::SpinnerWindow(QWidget *parent = nullptr) {
+SpinnerWindow::SpinnerWindow(QWidget *parent) {
     setParent(parent);
 
     // Setting Up Widgets
