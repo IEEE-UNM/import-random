@@ -11,10 +11,16 @@ SpinnerWindow::SpinnerWindow(QWidget *parent): QMainWindow(parent) {
     wheel = new SpinningWheel(this);
     editor = new QPlainTextEdit(this);
     spin = new QPushButton("Spin", this);
-    winnerBackground = new QWidget(wheel);
+    reset = new QPushButton("Reset", this);
     winner = new QLabel(wheel);
+    winnerBackground = new QWidget(wheel);
+    button_layout = new QStackedLayout();
     QWidget *centralWidget = new QWidget(this);
     QGridLayout *layout = new QGridLayout(centralWidget);
+
+    // Setting button_layout
+    button_layout->addWidget(spin);
+    button_layout->addWidget(reset);
 
     // Setting winner widget
     winner->setAlignment(Qt::AlignCenter);
@@ -33,7 +39,7 @@ SpinnerWindow::SpinnerWindow(QWidget *parent): QMainWindow(parent) {
     // Setting up the layout
     layout->addWidget(wheel, 0, 0);
     layout->addWidget(editor, 0, 1);
-    layout->addWidget(spin, 1, 1);
+    layout->addLayout(button_layout, 1, 1);
 
     // Setting centralWidget
     centralWidget->setLayout(layout);
@@ -43,6 +49,7 @@ SpinnerWindow::SpinnerWindow(QWidget *parent): QMainWindow(parent) {
     connect(editor, &QPlainTextEdit::textChanged, this, &SpinnerWindow::updateWheel);
     connect(spin, &QPushButton::clicked, this, &SpinnerWindow::spinWheel);
     connect(wheel, &SpinningWheel::stopped, this, &SpinnerWindow::displayWinner);
+    connect(reset, &QPushButton::clicked, this, &SpinnerWindow::resetWheel);
 }
 
 /** Slot called to update the items on the wheel.
@@ -58,6 +65,8 @@ void SpinnerWindow::updateWheel() {
     // Disabling and enabling the spinning the wheel if there is no text
     if (items.size() > 0 && !spun) {
         spin->setDisabled(false);
+    } else if (items.size() > 0 && spun) {
+        resetWheel();
     } else {
         spin->setDisabled(true);
     }
@@ -85,6 +94,23 @@ void SpinnerWindow::displayWinner(QString selected) {
     winnerBackground->setStyleSheet("background: white");
     winner->setText("Winner:\n" + selected);
     editor->setDisabled(false);
+    button_layout->setCurrentIndex(1);
+}
+
+/** Slot called to reset the SpinningWheel. */
+void SpinnerWindow::resetWheel() {
+    // Resetting Winner
+    winnerBackground->setStyleSheet("background: none");
+    winner->setText("");
+
+    // Resetting Wheel
+    wheel->reset();
+    spun = false;
+
+    // Resetting buttons
+    spin->setDisabled(false);
+    button_layout->setCurrentIndex(0);
+    updateWheel();
 }
 
 /** Method that handles the logic when the window is resized.

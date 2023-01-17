@@ -9,6 +9,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QResizeEvent>
+#include <QStackedLayout>
 
 class SpinnerWindow: public QMainWindow {
     Q_OBJECT
@@ -34,6 +35,8 @@ class SpinnerWindow: public QMainWindow {
         * It makes the background visible and displays the winner on the screen.
         * */
         void displayWinner(QString);
+        /** Slot called to reset the SpinningWheel. */
+        void resetWheel();
     protected:
         /** Method that handles the logic when the window is resized.
         *
@@ -48,8 +51,11 @@ class SpinnerWindow: public QMainWindow {
         SpinningWheel *wheel;
         QPlainTextEdit *editor; /*<The text editor to insert item. */
         QPushButton *spin; /*<Button to start spining the wheel. */
+        QPushButton *reset; /*<Button to reset the SpinningWheel. */
         QLabel *winner; /*<Label that displays the winner.  */
         QWidget *winnerBackground; /*<Background to the winner label. */
+        /** Stacked layout that stores the spin and reset button. */
+        QStackedLayout *button_layout;
         /** Variable that keep tracks if the SpinningWheel has be spun or not. */
         bool spun = false;
 };
