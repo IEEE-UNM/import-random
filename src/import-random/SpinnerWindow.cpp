@@ -6,9 +6,7 @@
  *
  * @param parent The parent of the window.
  * */
-SpinnerWindow::SpinnerWindow(QWidget *parent) {
-    setParent(parent);
-
+SpinnerWindow::SpinnerWindow(QWidget *parent): QMainWindow(parent) {
     // Setting Up Widgets
     wheel = new SpinningWheel(this);
     editor = new QPlainTextEdit(this);
@@ -78,7 +76,7 @@ void SpinnerWindow::spinWheel() {
     editor->setDisabled(true);
 }
 
-/** Slot called when the spinning wheel stoped spinning.
+/** Slot called when the SpinningWheel stoped spinning.
  *
  * This is called when the SpinningWheel::stopped() signal is emited.
  * It makes the background visible and displays the winner on the screen.
@@ -97,6 +95,8 @@ void SpinnerWindow::displayWinner(QString selected) {
  * @param event The resize event.
  * */
 void SpinnerWindow::resizeEvent(QResizeEvent *event) {
+    QMainWindow::resizeEvent(event);
+
     // Resizing winner background
     QSize wheelSize = wheel->size();
     winnerBackground->resize(wheelSize);

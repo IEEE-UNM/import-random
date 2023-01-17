@@ -42,7 +42,7 @@ class SpinnerWindow: public QMainWindow {
         *
         * @param event The resize event.
         * */
-        void resizeEvent(QResizeEvent *);
+        virtual void resizeEvent(QResizeEvent *);
     private:
         /** The SpinningWheel object. */
         SpinningWheel *wheel;
