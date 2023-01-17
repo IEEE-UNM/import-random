@@ -57,18 +57,20 @@ void SpinnerWindow::spinWheel() {
     wheel->spin();
     spun = true;
     spin->setDisabled(true);
+    editor->setDisabled(true);
 }
 
 void SpinnerWindow::displayWinner(QString selected) {
     winnerBackground->setStyleSheet("background: white");
     winner->setText("Winner:\n" + selected);
+    editor->setDisabled(false);
 }
 
 void SpinnerWindow::resizeEvent(QResizeEvent *) {
     QSize wheelSize = wheel->size();
     winnerBackground->resize(wheelSize);
 
-    int size;
+    int size = wheelSize.width();
     if (wheelSize.width() > wheelSize.height()) {
         size = wheelSize.height();
     } else {
