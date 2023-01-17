@@ -98,6 +98,7 @@ compile_commands.json
 *.exe
 *.out
 *.app
+bin/
 
 # .qt/
 .qt/
